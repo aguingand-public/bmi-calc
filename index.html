@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>my BMI 2.0</title>
+    <meta charset="utf8"/>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body ng-app="bmi">
+    <header>
+        <h1>Body Mass Index</h1>
+    </header>
+    <main ng-controller="DataController as ctrl" class="container">
+        <div class="row">
+            <div class="col s1"><i class="teal-text medium material-icons">accessibility</i></div>
+            <div class="col s3">
+                <label>Height in <b>{{ctrl.data.units | unitFilterInit : 'h'}}</b></label>
+                <input type="number" min="0" ng-model="ctrl.data.height" ng-change="ctrl.compute()"/>
+            </div>
+            <div class="col s1"><i class="teal-text medium material-icons">pregnant_woman</i></div>
+            <div class="col s3">
+                <label>Weight in <b>{{ctrl.data.units | unitFilterInit : 'w'}}</b></label>
+                <input type="number" min="0" ng-model="ctrl.data.weight" ng-change="ctrl.compute()"/>
+            </div>
+            <div class="col s1"><i class="teal-text medium material-icons">build</i></div>
+            <div class="input-field col s3">
+                <select ng-model="ctrl.data.units" ng-change="ctrl.unitChange()">
+                    <option value="" selected disabled>Choose Units</option>
+                    <option value="i">Imperial</option>
+                    <option value="m">Metric</option>
+                </select>
+                <label>Display Units ({{ctrl.data.units}})</label>
+            </div>
+            
+        </div>
+        <div class="card-panel {{ctrl.data.bmi | classFilter}} center white-text">
+            <h4>Results</h4>
+            <h6>Your height : {{ctrl.data.height | heightfilter : ctrl.data.units}}
+                {{ctrl.data.units | unitFilter : 'h'}}</h6>
+            <h6>Your weight : {{ctrl.data.weight | weightfilter : ctrl.data.units}} 
+                {{ctrl.data.units | unitFilter : 'w'}}<h6>
+            <h4>Your BMI : {{ctrl.data.bmi}}</h4>
+            <h6>You {{ctrl.data.bmi | resultfilter}}</h6>
+        </div>
+    </main>
+    
+    <footer class="page-footer grey">
+        <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+            <h5 class="white-text">IMC</h5>
+            <p class="grey-text text-lighten-4">Antoine Guingand</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+            <ul>
+                <li><a class="grey-text text-lighten-3" href="#!">IUT Robert Schuman</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Departement Informatique</a></li>
+            </ul>
+            </div>
+        </div>
+        </div>
+        <div class="footer-copyright">
+        <div class="container">
+        Made with <a class="light-blue-text text-lighten-3" href="http://materializecss.com">Materialize</a> & 
+        <a class="light-blue-text text-lighten-3" href="https://angularjs.org/">AngularJS</a>
+        </div>
+        </div>
+    </footer>
+    
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/imc.js"></script>
+</body>
+</html>
+    
